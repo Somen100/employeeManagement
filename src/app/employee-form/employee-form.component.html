@@ -1,0 +1,196 @@
+<div class="container  " style="  min-width: -webkit-fill-available;
+background:linear-gradient(white,rgb(157, 157, 250),rgb(114, 168, 219))">
+<div class="row">
+<h1 style="color: black; font-size: 25px; text-decoration: none;">Employee</h1>
+</div>
+  <div class="row">
+    <div class="col-10">
+      <label for="fname">First Name:</label>
+    </div>
+    <div class="col-90">
+      <input
+        type="text"
+        id="fname"
+        name="firstname"
+        placeholder="Enter your first name"
+        [(ngModel)]="employee.firstName"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <label for="lname">Last Name:</label>
+    </div>
+    <div class="col-90">
+      <input
+        type="text"
+        id="lname"
+        name="lastname"
+        placeholder="Enter your last name"
+        [(ngModel)]="employee.lastName"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <label for="email">Email:</label>
+    </div>
+    <div class="col-90">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="it should contain @,."
+        [(ngModel)]="employee.email"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <label for="mobile">Mobile Number:</label>
+    </div>
+    <div class="col-90">
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="only 10 digits are allowed"
+        [(ngModel)]="employee.mobile"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <label for="dob">Date Of Birth:</label>
+    </div>
+    <div class="col-90">
+      <input type="Date" id="dob" name="dob" [(ngModel)]="employee.dob" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <label for="gender" required>Gender:</label>
+    </div>
+    <div class="col-90" style="margin-left: 2em">
+      <!--------------------------------------------- 2nd -------------- way -->
+
+      <div class="custom-control custom-radio">
+        <input
+          id="male"
+          type="radio"
+          class="custom-control-input"
+          value="1"
+          name="gender"
+          [(ngModel)]="employee.genderId"
+        />
+        <label class="custom-control-label" for="male">Male</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input
+          id="female"
+          type="radio"
+          class="custom-control-input"
+          value="2"
+          name="gender"
+          [(ngModel)]="employee.genderId"
+        />
+        <label class="custom-control-label" for="female">Female</label>
+      </div>
+
+      <!--------------------------------------------- 3rd -------------- way -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+      <label for="address">Address:</label>
+    </div>
+    <div class="col-90">
+      <input
+        type="text"
+        [(ngModel)]="employee.address"
+        name="address"
+        id="address"
+        cols="30"
+        rows="10"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+      <label for="country" required>Country:</label>
+    </div>
+    <div class="col-90">
+      <select
+        (change)="onCountryDropdownChange()"
+        [(ngModel)]="employee.countryId"
+        class="form-control select2 select2-hidden-accessible"
+        style="color: black; width: 45%;"
+      >
+        <option [ngValue]="undefined" selected disabled>Country</option>
+        <option *ngFor="let c of CountryList" [ngValue]="c.countryId">
+          {{ c.countryName }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+      <label for="country" required>City:</label>
+    </div>
+    <div class="col-90">
+      <select [disabled]="isdisable == false" 
+      [disabled]="checkbox.checked" 
+        [(ngModel)]="employee.cityId"
+        class="form-control select2 select2-hidden-accessible"
+        style="color: black; width: 45%;"
+      >
+        <option [ngValue]="undefined" selected disabled>City</option>
+        <option *ngFor="let ct of cities" [ngValue]="ct.cityId">
+          {{ ct.cityName }}
+        </option>
+      </select>
+
+      <span><input type="checkbox"  [(ngModel)]="employee.checked" #checkbox id ="othercity" 
+        class="myinput mt-3 "
+         style="margin-right: 20px;" (change)="yourfunc($event)"> 
+     Other City 
+     
+     <input 
+     type="text" [hidden]="!checkbox.checked"
+     id="email" style="width: 270px; margin-left: 44px; height: 44%;"
+     name="email"
+     placeholder="City,." (change)="disableCityDropdown($event)"
+     [(ngModel)]="employee.otherCityName" 
+   /> 
+      </span>
+      
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+      <label for="specialization">Specialization:</label>
+    </div>
+    <div class="col-90"style="margin-left: 0em" *ngFor="let sk of SkillsList;">
+      
+      <span>
+      <input type="checkbox"  class="myinput" style="margin-right: 20px;"
+       value=" {{sk.skillId}}" (change)="onChange(sk, $event)" >
+       {{sk.skillName}}
+      </span>
+    </div>
+  </div>
+<span class=" m-4" style="display: flex; float: end;" >
+  
+  <div class="row mt-4" style="display: flex;float: end; margin-right: 50px;" >
+    <input type="submit" value="Save" (click)="SaveEmployeeDetails()" />
+  </div>
+  <div class="row mt-4"style="display: flex;float: end; margin-right: 50px; "  >
+    <input type="button" value="Cancel" (click)="Cancel()" />
+  </div>
+</span>
+ 
+</div>
